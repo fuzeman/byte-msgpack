@@ -1,4 +1,10 @@
+"""byte-msgpack - models module."""
+from __future__ import absolute_import, division, print_function
+
+
 class MessagePackCollectionStructure(object):
-    Dictionary  = 'dictionary'
-    List        = 'list'
-    Objects     = 'objects'
+    """MessagePack collection structures."""
+
+    Dictionary  = 'dictionary'  # noqa
+    List        = 'list'        # noqa
+    Objects     = 'objects'    # noqa

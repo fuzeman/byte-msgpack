@@ -22,6 +22,11 @@ class MessagePackEncoder(object):
         self.packer = Packer(**kwargs)
 
     def encode(self, items):
+        """Encode items.
+
+        :param items: Items
+        :type items: generator
+        """
         if self.format.structure == MessagePackCollectionStructure.Dictionary:
             return self._encode_dictionary(items)
 
@@ -34,12 +39,27 @@ class MessagePackEncoder(object):
         raise ValueError('Invalid encoder mode: %s' % (self.format.structure,))
 
     def _encode_dictionary(self, items):
+        """Encode :code:`items` to dictionary.
+
+        :param items: Items
+        :type items: generator
+        """
         self.stream.write(self.packer.pack(DictionaryEmitter(items)))
 
     def _encode_list(self, items):
+        """Encode :code:`items` to list.
+
+        :param items: Items
+        :type items: generator
+        """
         raise NotImplementedError
 
     def _encode_objects(self, items):
+        """Encode :code:`items` to individual objects.
+
+        :param items: Items
+        :type items: generator
+        """
         for _, item in items:
             self.stream.write(self.packer.pack(item))
 

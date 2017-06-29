@@ -33,6 +33,11 @@ class MessagePackCollectionFormat(BaseMessagePackFormat, CollectionFormatPlugin)
         ]
 
     def __init__(self, structure=MessagePackCollectionStructure.Objects):
+        """Create MessagePack collection format.
+
+        :param structure: Data Structure
+        :type structure: str
+        """
         self.structure = structure
 
     def insert(self, executor, operation):

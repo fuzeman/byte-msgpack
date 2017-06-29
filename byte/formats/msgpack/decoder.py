@@ -12,12 +12,14 @@ class MessagePackDecoder(object):
 
     def __init__(self, fmt, stream):
         """Create MessagePack decoder.
-        
+
         :param stream: Stream
         :type stream: file or io.IOBase
         """
         self.format = fmt
         self.stream = stream
+
+        self.unpacker = Unpacker(self.stream, encoding='utf-8')
 
     @property
     def closed(self):
@@ -45,9 +47,7 @@ class MessagePackDecoder(object):
         self.stream = None
 
     def _decode_dictionary(self):
-        unpacker = Unpacker(self.stream)
-
-        for items in unpacker:
+        for items in self.unpacker:
             if not items:
                 continue
 
@@ -58,9 +58,7 @@ class MessagePackDecoder(object):
                 yield item
 
     def _decode_list(self):
-        unpacker = Unpacker(self.stream)
-
-        for items in unpacker:
+        for items in self.unpacker:
             if not items:
                 continue
 
@@ -71,9 +69,7 @@ class MessagePackDecoder(object):
                 yield item
 
     def _decode_objects(self):
-        unpacker = Unpacker(self.stream)
-
-        for item in unpacker:
+        for item in self.unpacker:
             if not item:
                 continue
 

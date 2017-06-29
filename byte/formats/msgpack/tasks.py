@@ -9,7 +9,14 @@ from byte.formats.msgpack.encoder import MessagePackEncoder
 class MessagePackTask(StreamTask):
     """MessagePack task base."""
 
+    binary = True
+
     def __init__(self, executor):
+        """Create MessagePack task.
+
+        :param executor: Executor
+        :type executor: byte.executors.file.FileTableExecutor
+        """
         super(MessagePackTask, self).__init__(executor)
 
         self.format = None
