@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-"""Byte MessagePack compiler setup script (powered by pbr)."""
+"""byte-msgpack - setup script (powered by pbr)."""
 
 from setuptools import setup
 
