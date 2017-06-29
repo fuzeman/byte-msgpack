@@ -1,15 +1,18 @@
+from __future__ import absolute_import, division, print_function
+
+from byte.formats.msgpack import MessagePackCollectionStructure
+from byte.table import Table
 from tests.base.core.fixtures import get_fixture_uri
 from tests.base.models.dynamic.city import City
-
-from byte.table import Table
-from byte.formats.msgpack import MessagePackCollectionStructure
-from hamcrest import *
 import byte.compilers.operation
 import byte.executors.file
 import byte.formats.msgpack
 
+from hamcrest import *
+
 
 def test_all_list():
+    """Test all items can be retrieved from a list-structured table."""
     with get_fixture_uri('collections/list/cities.mpack') as artists_uri:
         cities = Table(
             City, artists_uri,
@@ -65,6 +68,7 @@ def test_all_list():
 
 
 def test_all_objects():
+    """Test all items can be retrieved from a objects-structured table."""
     with get_fixture_uri('collections/objects/cities.mpack') as artists_uri:
         cities = Table(
             City, artists_uri,
@@ -120,6 +124,7 @@ def test_all_objects():
 
 
 def test_where_list():
+    """Test filtered items can be retrieved from a list-structured table."""
     with get_fixture_uri('collections/list/cities.mpack') as artists_uri:
         cities = Table(
             City, artists_uri,
@@ -175,6 +180,7 @@ def test_where_list():
 
 
 def test_where_objects():
+    """Test filtered items can be retrieved from a objects-structured table."""
     with get_fixture_uri('collections/objects/cities.mpack') as artists_uri:
         cities = Table(
             City, artists_uri,

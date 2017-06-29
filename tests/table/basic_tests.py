@@ -1,17 +1,20 @@
+from __future__ import absolute_import, division, print_function
+
+from byte.table import Table
 from tests.base.core.fixtures import get_fixture_uri
 from tests.base.models.dynamic.album import Album
 from tests.base.models.dynamic.artist import Artist
 from tests.base.models.dynamic.city import City
 from tests.base.models.dynamic.track import Track
-
-from byte.table import Table
-from hamcrest import *
 import byte.compilers.operation
 import byte.executors.file
 import byte.formats.msgpack
 
+from hamcrest import *
+
 
 def test_all():
+    """Test all items are returned from MessagePack-formatted table."""
     with get_fixture_uri('databases/objects/music/artists.mpack') as artists_uri:
         artists = Table(Artist, artists_uri, plugins=[
             byte.compilers.operation,
@@ -49,6 +52,7 @@ def test_all():
 
 
 def test_create():
+    """Test items can be created on a MessagePack-formatted table."""
     with get_fixture_uri('databases/objects/music/artists.mpack') as artists_uri:
         artists = Table(Artist, artists_uri, plugins=[
             byte.compilers.operation,
@@ -67,6 +71,7 @@ def test_create():
 
 
 def test_get_basic():
+    """Test items can be retrieved from a MessagePack-formatted table."""
     with get_fixture_uri('databases/objects/music/artists.mpack') as artists_uri:
         artists = Table(Artist, artists_uri, plugins=[
             byte.compilers.operation,
@@ -82,6 +87,7 @@ def test_get_basic():
 
 
 def test_get_relations():
+    """Test relations can be resolved in a MessagePack-formatted table."""
     with get_fixture_uri((
         'databases/objects/music/artists.mpack',
         'databases/objects/music/albums.mpack',
@@ -144,6 +150,7 @@ def test_get_relations():
 
 
 def test_where():
+    """Test a MessagePack-formatted table can be filtered with expressions."""
     with get_fixture_uri('collections/objects/cities.mpack') as cities_uri:
         cities = Table(City, cities_uri, plugins=[
             byte.compilers.operation,
